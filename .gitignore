@@ -1,0 +1,6 @@
+Assets/Tutorialinfo*
+*.meta
+Library/
+Temp/
+Logs/
+Assets/TextMesh Pro/
