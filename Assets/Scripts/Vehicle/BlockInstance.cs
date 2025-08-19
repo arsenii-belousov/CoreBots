@@ -4,10 +4,10 @@
 using UnityEngine;
 
 [System.Serializable]
-public struct BlockInstance
+public struct BlueprintBlock
 {
-    public string defId;
+    public BlockDef def; // reference to the block definition
     public Vector3Int gridPos;   // position in grid cells relative to Core
     public Quaternion rotation;  // 90° step rotations
-    public int currentHP;        // for saves
+
 }

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9fd1ed0e96e54f872f8a1d54b334f, type: 3}
   m_Name: BasicArmorBlockDef
   m_EditorClassIdentifier: 
-  id: 
-  displayName: 
+  id: heavyArmor
+  displayName: Armor
   prefab: {fileID: 1978171890987152713, guid: 216a1bf8895149e439beb4afd700b891, type: 3}
   size: {x: 1, y: 1, z: 1}
-  mass: 1
+  mass: 100
   blockHP: 50
   category: 1
   energyProvide: 0

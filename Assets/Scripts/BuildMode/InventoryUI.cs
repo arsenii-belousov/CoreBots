@@ -5,25 +5,47 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    public BuildCursor cursor;
+    public PlacementController cursor;
     public BlockRegistry registry;
 
     void OnGUI()
     {
         if (registry == null || registry.blocks == null) return;
-        GUILayout.BeginArea(new Rect(10, 10, 520, 80), GUI.skin.box);
-        GUILayout.Label($"Inventory (1-9) | Snap: {(cursor && cursor.snapToGrid ? "ON" : "OFF")} | Total HP: {cursor.assembler.totalHP} | Net Energy: {cursor.assembler.GetNetEnergy()}");
+
+        // Place at the bottom center of the screen
+        float width = 520;
+        float height = 80;
+        float x = (Screen.width - width) / 2;
+        float y = Screen.height - height - 10;
+        GUILayout.BeginArea(new Rect(x, y, width, height), GUI.skin.box);
+
         GUILayout.BeginHorizontal();
+        var prevBg = GUI.backgroundColor;
         for (int i = 0; i < registry.blocks.Count && i < 9; i++)
         {
             var b = registry.blocks[i];
-            GUI.enabled = true;
-            if (GUILayout.Button($"{i + 1}. {b.displayName}\n[{b.category}]"))
+            bool isSelected = (cursor != null && cursor.selectedIndex == i);
+
+            // highlight selected slot
+            GUI.backgroundColor = isSelected ? new Color(0.2f, 0.6f, 1f, 1f) : prevBg;
+
+            if (GUILayout.Button($"{i + 1}\n{b.displayName}\n[{b.category}]", GUILayout.Width(56), GUILayout.Height(56)))
             {
-                cursor.selectedIndex = i;
+                if (cursor != null)
+                {
+                    //TODO Fix it
+                    // call public API directly (safer than SendMessage)
+                    //cursor.SetSelectedIndex(i);
+                }
+                else
+                {
+                    Debug.LogWarning("InventoryUI: cursor reference is not assigned in the Inspector.");
+                }
             }
         }
+        GUI.backgroundColor = prevBg;
         GUILayout.EndHorizontal();
+
         GUILayout.EndArea();
     }
 }

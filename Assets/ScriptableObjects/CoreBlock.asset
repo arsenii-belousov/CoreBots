@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b9fd1ed0e96e54f872f8a1d54b334f, type: 3}
+  m_Name: CoreBlock
+  m_EditorClassIdentifier: 
+  id: core
+  displayName: Core
+  prefab: {fileID: 6859385287803196250, guid: 255f9c075fa42ad4fb961b9fb94628ff, type: 3}
+  size: {x: 3, y: 2, z: 1}
+  mass: 10
+  blockHP: 100
+  category: 0
+  energyProvide: 0
+  energyConsume: 0
+  mustAttachToStructure: 1
