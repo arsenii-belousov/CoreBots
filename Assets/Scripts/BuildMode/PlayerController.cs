@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private BuildControls buildControls;
 
+[SerializeField]
     private PlacementController placementController; // Reference to the PlacementController
 
     public BlockRegistry blockRegistry;
@@ -26,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
     void OnEnable()
     {
-        placementController = GetComponentInChildren<PlacementController>();
 
         selectedBlock = blockRegistry.blocks[0];
         buildControls = new BuildControls();
@@ -85,7 +85,8 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Vector3Int gridPosition = GridUtil.WorldToGrid(hit.point - hit.normal * 0.01f);
-            return new Tuple<Vector3Int, Vector3>(gridPosition, hit.point);
+            Debug.Log($"Looking at block on grid: {hit.point} -> {gridPosition}");
+            return new Tuple<Vector3Int, Vector3>(gridPosition, hit.normal);
         }
         return null;
     }
@@ -98,7 +99,8 @@ public class PlayerController : MonoBehaviour
 
     void RemoveBlock()
     {
-        // Implementation for removing a block
+        var (position, _) = LookAtBlockOnTheGrid();
+        placementController.TryRemoveBlock(position);
     }
 
 }

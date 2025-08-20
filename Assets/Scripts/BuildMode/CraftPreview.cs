@@ -90,8 +90,8 @@ public class CraftWorldModel : MonoBehaviour
 		if (instances.TryGetValue(cell, out var existing) && existing)
 		{
 			// Replace if prefab mismatch
-			var marker = existing.GetComponent<BlueprintBlock>();
-			if (marker.def == block.def) return; // already correct
+			var marker = existing.GetComponent<BlockDef>();
+			if (marker == block.def) return; // already correct
 			Destroy(existing);
 			instances.Remove(cell);
 		}
@@ -117,13 +117,14 @@ public class CraftWorldModel : MonoBehaviour
 	{
 		if (!block.def || !block.def.prefab) return;
 		var go = Instantiate(block.def.prefab, contentRoot);
-		go.transform.localPosition = GridUtil.GridToWorldCenter(cell); // assumes 1x1x1 and center-based grid
-		go.transform.localRotation = block.rotation;
+		go.transform.position = GridUtil.GridToWorldCenter(cell); // assumes 1x1x1 and center-based grid
+		go.transform.rotation = block.rotation;
 		go.transform.localScale = Vector3.Scale(Vector3.one * GridUtil.CellSize, (Vector3)block.def.size);
 		var marker = go.AddComponent<CraftPreviewMarker>();
 		marker.def = block.def;
-        marker.gridPos = cell;
+		marker.gridPos = cell;
 		instances[cell] = go;
+		Debug.Log($"Spawned block {block.def.displayName} at {cell} -> {GridUtil.GridToWorldCenter(cell)} with rotation {block.rotation.eulerAngles}");
 	}
 }
 

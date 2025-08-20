@@ -5,9 +5,9 @@ using UnityEngine;
 
 public static class GridUtil
 {
-    public const float CellSize = 1f;
+    public const float CellSize = 0.5f;
 
-    static Vector3 GridOrigin = new Vector3(0.0f, 1.5f, 0.0f); // world-space origin (corner of cell 0,0,0)
+    static Vector3 GridOrigin = new Vector3(0.0f, 0.0f, 0.0f); // world-space origin (corner of cell 0,0,0)
 
     public static Vector3 GetGridOrigin()
     {
